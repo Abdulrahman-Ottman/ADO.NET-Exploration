@@ -30,6 +30,7 @@ namespace ADO.NET_Exploration
                     string address = (string)reader["Address"];
                     int countryID = (int)reader["CountryID"];
 
+                    
                     Console.WriteLine($"Contact ID: {contactID}");
                     Console.WriteLine($"Name: {firstName} {lastName}");
                     Console.WriteLine($"Email: {email}");
