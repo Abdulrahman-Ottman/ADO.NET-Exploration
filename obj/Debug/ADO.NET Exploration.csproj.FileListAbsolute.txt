@@ -1,0 +1,7 @@
+C:\Users\MOUNES OTHMAN\source\repos\ADO.NET Exploration\bin\Debug\ADO.NET Exploration.exe.config
+C:\Users\MOUNES OTHMAN\source\repos\ADO.NET Exploration\bin\Debug\ADO.NET Exploration.exe
+C:\Users\MOUNES OTHMAN\source\repos\ADO.NET Exploration\bin\Debug\ADO.NET Exploration.pdb
+C:\Users\MOUNES OTHMAN\source\repos\ADO.NET Exploration\obj\Debug\ADO.NET Exploration.csproj.AssemblyReference.cache
+C:\Users\MOUNES OTHMAN\source\repos\ADO.NET Exploration\obj\Debug\ADO.NET Exploration.csproj.CoreCompileInputs.cache
+C:\Users\MOUNES OTHMAN\source\repos\ADO.NET Exploration\obj\Debug\ADO.NET Exploration.exe
+C:\Users\MOUNES OTHMAN\source\repos\ADO.NET Exploration\obj\Debug\ADO.NET Exploration.pdb
