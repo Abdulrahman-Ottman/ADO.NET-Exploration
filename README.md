@@ -1,4 +1,4 @@
-#ADO.NET Exploration
+# ADO.NET Exploration.  
 this project is just for training and exploration purpuses
 
 **Files used in this project :**
