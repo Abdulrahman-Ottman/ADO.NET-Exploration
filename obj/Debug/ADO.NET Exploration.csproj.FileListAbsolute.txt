@@ -5,3 +5,10 @@ C:\Users\MOUNES OTHMAN\source\repos\ADO.NET Exploration\obj\Debug\ADO.NET Explor
 C:\Users\MOUNES OTHMAN\source\repos\ADO.NET Exploration\obj\Debug\ADO.NET Exploration.csproj.CoreCompileInputs.cache
 C:\Users\MOUNES OTHMAN\source\repos\ADO.NET Exploration\obj\Debug\ADO.NET Exploration.exe
 C:\Users\MOUNES OTHMAN\source\repos\ADO.NET Exploration\obj\Debug\ADO.NET Exploration.pdb
+C:\Courses\Abu-Hadhod\ADO.NET Exploration\obj\Debug\ADO.NET Exploration.csproj.AssemblyReference.cache
+C:\Courses\Abu-Hadhod\ADO.NET Exploration\obj\Debug\ADO.NET Exploration.csproj.CoreCompileInputs.cache
+C:\Courses\Abu-Hadhod\ADO.NET Exploration\obj\Debug\ADO.NET Exploration.exe
+C:\Courses\Abu-Hadhod\ADO.NET Exploration\obj\Debug\ADO.NET Exploration.pdb
+C:\Courses\Abu-Hadhod\ADO.NET Exploration\bin\Debug\ADO.NET Exploration.exe.config
+C:\Courses\Abu-Hadhod\ADO.NET Exploration\bin\Debug\ADO.NET Exploration.exe
+C:\Courses\Abu-Hadhod\ADO.NET Exploration\bin\Debug\ADO.NET Exploration.pdb
