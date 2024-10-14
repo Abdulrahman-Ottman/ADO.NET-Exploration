@@ -12,10 +12,11 @@ namespace ADO.NET_Exploration
         static string connectionString = "Server=.;Database=Contacts;User Id=sa;Password=abdulrahman.10.10.2022.abdulrahman";
         static SqlConnection connection = new SqlConnection(connectionString);
 
-        static void getFirstNameOfContact(int id)
+
+        static bool FindContactById(int id , ref stContact contact)
         {
-            string FirstName = "";
-            string query = "select FirstName from Contacts Where ContactID = @ContactID";
+            bool isFound = false;
+            string query = "select * from Contacts Where ContactID = @ContactID";
 
             SqlCommand command = new SqlCommand(query , connection);
 
@@ -24,11 +25,14 @@ namespace ADO.NET_Exploration
             try
             {
                 connection.Open();
-                object result = command.ExecuteScalar();
+                SqlDataReader reader = command.ExecuteReader();
 
-                if (result != null)
+                if (reader.Read())
                 {
-                    FirstName = result.ToString();
+                    contact.FirstName = (string)reader["FirstName"];
+                    contact.LastName = (string)reader["LastName"];
+                    contact.email = (string)reader["email"];
+                    isFound = true;
                 }
 
                 connection.Close();
@@ -37,14 +41,29 @@ namespace ADO.NET_Exploration
             catch (Exception ex) {
                 Console.WriteLine(ex.Message);
             }
-            
-            Console.WriteLine(FirstName);
+            return isFound;
         }
+
+        public struct stContact
+        {
+           public  string FirstName;
+           public string LastName;
+           public string email;
+        }
+
         static void Main(string[] args)
         {
-
-            //ExecuteScalar function return the first column from the first row of the results
-            getFirstNameOfContact(1);
+            stContact contact = new stContact();
+            if ( FindContactById(4 ,ref contact) )
+            {
+                Console.WriteLine(contact.FirstName);
+                Console.WriteLine(contact.LastName);
+                Console.WriteLine(contact.email);
+            }
+            else
+            {
+                Console.WriteLine("Not Found");
+            }
         }
     }
 }
