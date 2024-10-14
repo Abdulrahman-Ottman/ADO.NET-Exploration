@@ -12,39 +12,10 @@ namespace ADO.NET_Exploration
         static string connectionString = "Server=.;Database=Contacts;User Id=sa;Password=abdulrahman.10.10.2022.abdulrahman";
         static SqlConnection connection = new SqlConnection(connectionString);
 
-        static void getFirstNameOfContact(int id)
-        {
-            string FirstName = "";
-            string query = "select FirstName from Contacts Where ContactID = @ContactID";
-
-            SqlCommand command = new SqlCommand(query , connection);
-
-            command.Parameters.AddWithValue("@ContactID" , id);
-
-            try
-            {
-                connection.Open();
-                object result = command.ExecuteScalar();
-
-                if (result != null)
-                {
-                    FirstName = result.ToString();
-                }
-
-                connection.Close();
-
-            }
-            catch (Exception ex) {
-                Console.WriteLine(ex.Message);
-            }
-            
-            Console.WriteLine(FirstName);
-        }
         static void Main(string[] args)
         {
 
             //ExecuteScalar function return the first column from the first row of the results
-            getFirstNameOfContact(1);
         }
     }
 }
