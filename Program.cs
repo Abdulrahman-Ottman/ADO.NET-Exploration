@@ -33,6 +33,7 @@ public class Program
 
         SqlCommand command = new SqlCommand(query, connection);
 
+
         command.Parameters.AddWithValue("@FirstName", newContact.FirstName);
         command.Parameters.AddWithValue("@LastName", newContact.LastName);
         command.Parameters.AddWithValue("@Email", newContact.Email);
