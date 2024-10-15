@@ -19,27 +19,21 @@ public class Program
         public int CountryID { get; set; }
     }
 
-    static bool UpdateContactById(int id ,stContact newContact)
+    static bool DeleteContactById(int id)
     {
-        bool isUpdated = false;
-        string query = @"UPDATE Contacts
-                           SET [FirstName] = @FirstName
-                              ,[LastName] =  @LastName
-                              ,[Email] = @Email
-                              ,[Phone] = @Phone
-                              ,[Address] = @Address
-                              ,[CountryID] = @CountryId
-                         WHERE ContactID = @id";
+        bool isDeleted = false;
+        string query = @"DELETE FROM Contacts
+                         where ContactID = @id";
 
         SqlCommand command = new SqlCommand(query, connection);
 
 
-        command.Parameters.AddWithValue("@FirstName", newContact.FirstName);
-        command.Parameters.AddWithValue("@LastName", newContact.LastName);
-        command.Parameters.AddWithValue("@Email", newContact.Email);
-        command.Parameters.AddWithValue("@Phone", newContact.Phone);
-        command.Parameters.AddWithValue("@Address", newContact.Address);
-        command.Parameters.AddWithValue("@CountryID", newContact.CountryID);
+        //command.Parameters.AddWithValue("@FirstName", newContact.FirstName);
+        //command.Parameters.AddWithValue("@LastName", newContact.LastName);
+        //command.Parameters.AddWithValue("@Email", newContact.Email);
+        //command.Parameters.AddWithValue("@Phone", newContact.Phone);
+        //command.Parameters.AddWithValue("@Address", newContact.Address);
+        //command.Parameters.AddWithValue("@CountryID", newContact.CountryID);
         command.Parameters.AddWithValue("@id", id);
 
         try
@@ -50,7 +44,7 @@ public class Program
 
             if (result > 0 )
             {
-                isUpdated = true;
+                isDeleted = true;
             }
 
 
@@ -62,25 +56,25 @@ public class Program
             Console.WriteLine("Error: " + ex.Message);
         }
 
-        return isUpdated;
+        return isDeleted;
     }
 
     public static void Main()
     {
 
         // Create a new contact with the required information
-        stContact Contact = new stContact
-        {
-            FirstName = "Abdulrahman4",
-            LastName = "Othman4",
-            Email = "abood@example.com",
-            Phone = "1234567890",
-            Address = "123 Main Street",
-            CountryID = 1
-        };
+        //stContact Contact = new stContact
+        //{
+        //    FirstName = "Abdulrahman4",
+        //    LastName = "Othman4",
+        //    Email = "abood@example.com",
+        //    Phone = "1234567890",
+        //    Address = "123 Main Street",
+        //    CountryID = 1
+        //};
 
-        bool id = UpdateContactById(2 ,Contact);
+        bool result = DeleteContactById(10);
 
-        Console.WriteLine(id);
+        Console.WriteLine(result);
     }
 }
