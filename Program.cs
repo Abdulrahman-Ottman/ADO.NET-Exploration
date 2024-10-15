@@ -19,11 +19,10 @@ public class Program
         public int CountryID { get; set; }
     }
 
-    static bool DeleteContactById(int id)
+    static bool DeleteContactsById(string ids)
     {
         bool isDeleted = false;
-        string query = @"DELETE FROM Contacts
-                         where ContactID = @id";
+        string query = $"DELETE FROM Contacts where ContactID in ({ids})";
 
         SqlCommand command = new SqlCommand(query, connection);
 
@@ -34,7 +33,7 @@ public class Program
         //command.Parameters.AddWithValue("@Phone", newContact.Phone);
         //command.Parameters.AddWithValue("@Address", newContact.Address);
         //command.Parameters.AddWithValue("@CountryID", newContact.CountryID);
-        command.Parameters.AddWithValue("@id", id);
+        //command.Parameters.AddWithValue("@id", id);
 
         try
         {
@@ -73,7 +72,7 @@ public class Program
         //    CountryID = 1
         //};
 
-        bool result = DeleteContactById(10);
+        bool result = DeleteContactsById("7,8,9");
 
         Console.WriteLine(result);
     }
