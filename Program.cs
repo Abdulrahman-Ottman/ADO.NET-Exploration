@@ -1,79 +1,43 @@
 ﻿using System;
 using System.Data;
-using System.Net;
-using System.Data.SqlClient;
+using System.Linq;
 
-public class Program
+public class Example
 {
-    static string connectionString = "Server=.;Database=Contacts;User Id=sa;Password=abood";
-    static SqlConnection connection = new SqlConnection(connectionString);
-
-
-    public struct stContact
-    {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
-        public string Address { get; set; }
-        public int CountryID { get; set; }
-    }
-
-    static bool DeleteContactsById(string ids)
-    {
-        bool isDeleted = false;
-        string query = $"DELETE FROM Contacts where ContactID in ({ids})";
-
-        SqlCommand command = new SqlCommand(query, connection);
-
-
-        //command.Parameters.AddWithValue("@FirstName", newContact.FirstName);
-        //command.Parameters.AddWithValue("@LastName", newContact.LastName);
-        //command.Parameters.AddWithValue("@Email", newContact.Email);
-        //command.Parameters.AddWithValue("@Phone", newContact.Phone);
-        //command.Parameters.AddWithValue("@Address", newContact.Address);
-        //command.Parameters.AddWithValue("@CountryID", newContact.CountryID);
-        //command.Parameters.AddWithValue("@id", id);
-
-        try
-        {
-            connection.Open();
-
-            int result = command.ExecuteNonQuery();
-
-            if (result > 0 )
-            {
-                isDeleted = true;
-            }
-
-
-            connection.Close();
-
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Error: " + ex.Message);
-        }
-
-        return isDeleted;
-    }
-
     public static void Main()
     {
+        DataTable EmployeesDataTable = new DataTable();
+        EmployeesDataTable.Columns.Add("ID", typeof(int));
+        EmployeesDataTable.Columns.Add("Name", typeof(string));
+        EmployeesDataTable.Columns.Add("Country", typeof(string));
+        EmployeesDataTable.Columns.Add("Salary", typeof(Double));
+        EmployeesDataTable.Columns.Add("Date", typeof(DateTime));
 
-        // Create a new contact with the required information
-        //stContact Contact = new stContact
-        //{
-        //    FirstName = "Abdulrahman4",
-        //    LastName = "Othman4",
-        //    Email = "abood@example.com",
-        //    Phone = "1234567890",
-        //    Address = "123 Main Street",
-        //    CountryID = 1
-        //};
+        //Add rows 
+        EmployeesDataTable.Rows.Add(1, "Mohammed Abu-Hadhoud", "Jordan", 5000, DateTime.Now);
+        EmployeesDataTable.Rows.Add(2, "Ali Maher", "KSA", 525.5, DateTime.Now);
+        EmployeesDataTable.Rows.Add(3, "Lina Kamal", "Jordan", 730.5, DateTime.Now);
+        EmployeesDataTable.Rows.Add(4, "Fadi JAmeel", "Egypt", 800, DateTime.Now);
+        EmployeesDataTable.Rows.Add(5, "Omar Mahmoud", "Lebanon", 7000, DateTime.Now);
 
-        bool result = DeleteContactsById("7,8,9");
 
-        Console.WriteLine(result);
+        Console.WriteLine("\nEmployees List:\n");
+
+        foreach (DataRow RecordRow in EmployeesDataTable.Rows)
+        {
+            //Using Index
+            // Console.WriteLine("ID: {0}\t Name : {1} \t Country: {2} \t Salary: {3} Date: {4} \t ", RecordRow[0], RecordRow[1], RecordRow[2], RecordRow[3], RecordRow[4]);
+
+            //Using Field Name
+            Console.WriteLine("ID: {0}\t Name : {1} \t Country: {2} \t Salary: {3} Date: {4} \t ",
+                RecordRow["ID"], RecordRow["Name"], RecordRow["Country"], RecordRow["Salary"],
+                RecordRow["Date"]);
+
+        }
+
+
+
+        Console.ReadKey();
+
     }
 }
