@@ -29,18 +29,19 @@ public class Example
 
         }
 
-        //Delete Employee with ID=4
-        Console.WriteLine("\n\nEmployees List After Deleting ID = 4 :\n");
+
+
 
         //First You filter for Employee ID=4
         DataRow[] Restults = EmployeesDataTable.Select("ID=4");
-
         foreach (var RecordRow in Restults)
         {
-            RecordRow.Delete();
+            RecordRow["Name"] = "Maha Ahmed";
+            RecordRow["Salary"] = "900";
         }
+        //EmployeesDataTable.AcceptChanges();
 
-        EmployeesDataTable.AcceptChanges();
+        Console.WriteLine("\n\nUpdating Employee ID = 4 record:\n");
 
         foreach (DataRow RecordRow in EmployeesDataTable.Rows)
         {
