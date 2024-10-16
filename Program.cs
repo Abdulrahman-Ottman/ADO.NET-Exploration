@@ -24,38 +24,28 @@ public class Example
 
         foreach (DataRow RecordRow in EmployeesDataTable.Rows)
         {
-
             //Using Field Name
             Console.WriteLine(" ID: {0}\t Name : {1} \t Country: {2} \t Salary: {3} Date: {4} \t ", RecordRow["ID"], RecordRow["Name"], RecordRow["Country"], RecordRow["Salary"], RecordRow["Date"]);
 
         }
 
+        //Delete Employee with ID=4
+        Console.WriteLine("\n\nEmployees List After Deleting ID = 4 :\n");
 
-        EmployeesDataTable.DefaultView.Sort = "ID desc";
-        EmployeesDataTable = EmployeesDataTable.DefaultView.ToTable();
+        //First You filter for Employee ID=4
+        DataRow[] Restults = EmployeesDataTable.Select("ID=4");
 
-        Console.WriteLine("\n\nEmployees List Sorted By ID Desc:\n");
-
-        foreach (DataRow RecordRow in EmployeesDataTable.Rows)
+        foreach (var RecordRow in Restults)
         {
-
-            //Using Field Name
-            Console.WriteLine(" ID: {0}\t Name : {1} \t Country: {2} \t Salary: {3} Date: {4} \t ", RecordRow["ID"], RecordRow["Name"], RecordRow["Country"], RecordRow["Salary"], RecordRow["Date"]);
-
+            RecordRow.Delete();
         }
 
-        //Sort by name asc
-        EmployeesDataTable.DefaultView.Sort = "Name ASC";
-        EmployeesDataTable = EmployeesDataTable.DefaultView.ToTable();
-
-        Console.WriteLine("\n\nEmployees List Sorted By Name ASC:\n");
+        EmployeesDataTable.AcceptChanges();
 
         foreach (DataRow RecordRow in EmployeesDataTable.Rows)
         {
-
             //Using Field Name
             Console.WriteLine(" ID: {0}\t Name : {1} \t Country: {2} \t Salary: {3} Date: {4} \t ", RecordRow["ID"], RecordRow["Name"], RecordRow["Country"], RecordRow["Salary"], RecordRow["Date"]);
-
         }
 
         Console.ReadKey();
