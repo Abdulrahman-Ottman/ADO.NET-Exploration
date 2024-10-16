@@ -34,7 +34,6 @@ public class Example
         //
 
         DataView EmployeesDataView1 = EmployeesDataTable.DefaultView;
-
         Console.WriteLine("\nEmployees List from data view:\n");
         for (int i = 0; i < EmployeesDataView1.Count; i++)
         {
@@ -43,7 +42,20 @@ public class Example
 
         }
 
+        //
+        // Now Filter.
+        //
+        EmployeesDataView1.RowFilter = "Country='Jordan' or Country='Egypt'";
+        //
+        // Display all records in the view.
+        //
+        Console.WriteLine("\nEmployees List from data view after filtering \"Jodan or Egypt\":\n");
+        for (int i = 0; i < EmployeesDataView1.Count; i++)
+        {
+            Console.WriteLine("{0}, {1} ,{2} , {3}", EmployeesDataView1[i][0], EmployeesDataView1[i][1],
+               EmployeesDataView1[i][2], EmployeesDataView1[i][3]);
 
+        }
         Console.ReadKey();
 
     }
