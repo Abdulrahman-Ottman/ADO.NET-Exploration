@@ -43,13 +43,13 @@ public class Example
         }
 
         //
-        // Now Filter.
+        // Now sort by Name Desc.
         //
-        EmployeesDataView1.RowFilter = "Country='Jordan' or Country='Egypt'";
+        EmployeesDataView1.Sort = "Name ASC";
         //
         // Display all records in the view.
         //
-        Console.WriteLine("\nEmployees List from data view after filtering \"Jodan or Egypt\":\n");
+        Console.WriteLine("\nEmployees List from data view after sorting by Name ASC:\n");
         for (int i = 0; i < EmployeesDataView1.Count; i++)
         {
             Console.WriteLine("{0}, {1} ,{2} , {3}", EmployeesDataView1[i][0], EmployeesDataView1[i][1],
