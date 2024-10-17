@@ -20,42 +20,68 @@ public class Example
         EmployeesDataTable.Rows.Add(4, "Fadi JAmeel", "Egypt", 800, DateTime.Now);
         EmployeesDataTable.Rows.Add(5, "Omar Mahmoud", "Lebanon", 7000, DateTime.Now);
 
+
         Console.WriteLine("\nEmployees List:\n");
 
         foreach (DataRow RecordRow in EmployeesDataTable.Rows)
         {
             //Using Field Name
-            Console.WriteLine(" ID: {0}\t Name : {1} \t Country: {2} \t Salary: {3} Date: {4} \t ", RecordRow["ID"], RecordRow["Name"], RecordRow["Country"], RecordRow["Salary"], RecordRow["Date"]);
+            Console.WriteLine("ID: {0}\t Name : {1} \t Country: {2} \t Salary: {3} Date: {4} \t ",
+                RecordRow["ID"], RecordRow["Name"], RecordRow["Country"], RecordRow["Salary"],
+                RecordRow["Date"]);
 
         }
 
-        //
-        // Display all records in the view.
-        //
 
-        DataView EmployeesDataView1 = EmployeesDataTable.DefaultView;
-        Console.WriteLine("\nEmployees List from data view:\n");
-        for (int i = 0; i < EmployeesDataView1.Count; i++)
+        DataTable DepartmentsDataTable = new DataTable();
+        DepartmentsDataTable.Columns.Add("DepartmentID", typeof(int));
+        DepartmentsDataTable.Columns.Add("Name", typeof(string));
+
+        //Add rows 
+        DepartmentsDataTable.Rows.Add(1, "Marketing");
+        DepartmentsDataTable.Rows.Add(2, "IT");
+        DepartmentsDataTable.Rows.Add(3, "HR");
+
+
+        Console.WriteLine("\nDepartments List:\n");
+
+        foreach (DataRow RecordRow in DepartmentsDataTable.Rows)
         {
-            Console.WriteLine("{0}, {1} ,{2} , {3}", EmployeesDataView1[i][0], EmployeesDataView1[i][1],
-                EmployeesDataView1[i][2], EmployeesDataView1[i][3]);
+
+            //Using Field Name
+            Console.WriteLine("DepartmentID: {0}\t Name : {1} ",
+                RecordRow["DepartmentID"], RecordRow["Name"]);
 
         }
 
-        //
-        // Now sort by Name Desc.
-        //
-        EmployeesDataView1.Sort = "Name ASC";
-        //
-        // Display all records in the view.
-        //
-        Console.WriteLine("\nEmployees List from data view after sorting by Name ASC:\n");
-        for (int i = 0; i < EmployeesDataView1.Count; i++)
+        //Create Dataset
+        DataSet dataSet1 = new DataSet();
+
+        //Adding DataTables into DataSet
+        dataSet1.Tables.Add(EmployeesDataTable);
+        dataSet1.Tables.Add(DepartmentsDataTable);
+
+        Console.WriteLine("\nPrinting Employees Data form the Dataset\n");
+        foreach (DataRow RecordRow in dataSet1.Tables[0].Rows)
         {
-            Console.WriteLine("{0}, {1} ,{2} , {3}", EmployeesDataView1[i][0], EmployeesDataView1[i][1],
-               EmployeesDataView1[i][2], EmployeesDataView1[i][3]);
+            //Using Field Name
+            Console.WriteLine("ID: {0}\t Name : {1} \t Country: {2} \t Salary: {3} Date: {4} \t ",
+                RecordRow["ID"], RecordRow["Name"], RecordRow["Country"], RecordRow["Salary"],
+                RecordRow["Date"]);
+        }
+
+        Console.WriteLine("\nPrinting Departments Data form the Dataset\n");
+
+        foreach (DataRow RecordRow in dataSet1.Tables[1].Rows)
+        {
+            //Using Field Name
+            Console.WriteLine("DepartmentID: {0}\t Name : {1} ",
+                RecordRow["DepartmentID"], RecordRow["Name"]);
+
 
         }
+
+
         Console.ReadKey();
 
     }
