@@ -1,88 +1,56 @@
 ﻿using System;
 using System.Data;
-using System.Linq;
+using System.Data.SqlClient;
 
-public class Example
+class Program
 {
-    public static void Main()
+    static void Main()
     {
-        DataTable EmployeesDataTable = new DataTable();
-        EmployeesDataTable.Columns.Add("ID", typeof(int));
-        EmployeesDataTable.Columns.Add("Name", typeof(string));
-        EmployeesDataTable.Columns.Add("Country", typeof(string));
-        EmployeesDataTable.Columns.Add("Salary", typeof(Double));
-        EmployeesDataTable.Columns.Add("Date", typeof(DateTime));
 
-        //Add rows 
-        EmployeesDataTable.Rows.Add(1, "Mohammed Abu-Hadhoud", "Jordan", 5000, DateTime.Now);
-        EmployeesDataTable.Rows.Add(2, "Ali Maher", "KSA", 525.5, DateTime.Now);
-        EmployeesDataTable.Rows.Add(3, "Lina Kamal", "Jordan", 730.5, DateTime.Now);
-        EmployeesDataTable.Rows.Add(4, "Fadi JAmeel", "Egypt", 800, DateTime.Now);
-        EmployeesDataTable.Rows.Add(5, "Omar Mahmoud", "Lebanon", 7000, DateTime.Now);
+        string connectionString =
+             "Server=.;Database=HR_Database;User Id=sa;Password=abood;";
 
+        // Create a new DataSet
+        DataSet dataSet = new DataSet();
 
-        Console.WriteLine("\nEmployees List:\n");
+        // Create a new DataAdapter with a SELECT query and the connection string
+        string query = "SELECT * FROM Employees;";
+        SqlDataAdapter dataAdapter = new SqlDataAdapter(query, connectionString);
 
-        foreach (DataRow RecordRow in EmployeesDataTable.Rows)
+        // Open the connection
+        SqlConnection connection = new SqlConnection(connectionString);
+
+        connection.Open();
+
+        // Set the SelectCommand of the DataAdapter to the connection
+        dataAdapter.SelectCommand.Connection = connection;
+
+        // Fill the DataSet with data from the data source
+        dataAdapter.Fill(dataSet, "Employees");
+
+        connection.Close();
+
+        // Display the data from the DataSet
+        DataTable customersTable = dataSet.Tables["Employees"];
+        foreach (DataRow row in customersTable.Rows)
         {
-            //Using Field Name
-            Console.WriteLine("ID: {0}\t Name : {1} \t Country: {2} \t Salary: {3} Date: {4} \t ",
-                RecordRow["ID"], RecordRow["Name"], RecordRow["Country"], RecordRow["Salary"],
-                RecordRow["Date"]);
-
+            Console.WriteLine("Customer ID: {0}, Name: {1}, LastName: {2}", row["ID"], row["FirstName"], row["LastName"]);
         }
 
+        // Make changes to the DataSet (add, modify, or delete rows)
+        //
+        //
+        ///
 
-        DataTable DepartmentsDataTable = new DataTable();
-        DepartmentsDataTable.Columns.Add("DepartmentID", typeof(int));
-        DepartmentsDataTable.Columns.Add("Name", typeof(string));
+        // Update the data source with the changes made to the DataSet
+        connection.Open();
 
-        //Add rows 
-        DepartmentsDataTable.Rows.Add(1, "Marketing");
-        DepartmentsDataTable.Rows.Add(2, "IT");
-        DepartmentsDataTable.Rows.Add(3, "HR");
+        // Set the UpdateCommand of the DataAdapter to the connection
+        dataAdapter.UpdateCommand.Connection = connection;
 
+        // Update the data source with the changes
+        dataAdapter.Update(dataSet, "Employees");
 
-        Console.WriteLine("\nDepartments List:\n");
-
-        foreach (DataRow RecordRow in DepartmentsDataTable.Rows)
-        {
-
-            //Using Field Name
-            Console.WriteLine("DepartmentID: {0}\t Name : {1} ",
-                RecordRow["DepartmentID"], RecordRow["Name"]);
-
-        }
-
-        //Create Dataset
-        DataSet dataSet1 = new DataSet();
-
-        //Adding DataTables into DataSet
-        dataSet1.Tables.Add(EmployeesDataTable);
-        dataSet1.Tables.Add(DepartmentsDataTable);
-
-        Console.WriteLine("\nPrinting Employees Data form the Dataset\n");
-        foreach (DataRow RecordRow in dataSet1.Tables[0].Rows)
-        {
-            //Using Field Name
-            Console.WriteLine("ID: {0}\t Name : {1} \t Country: {2} \t Salary: {3} Date: {4} \t ",
-                RecordRow["ID"], RecordRow["Name"], RecordRow["Country"], RecordRow["Salary"],
-                RecordRow["Date"]);
-        }
-
-        Console.WriteLine("\nPrinting Departments Data form the Dataset\n");
-
-        foreach (DataRow RecordRow in dataSet1.Tables[1].Rows)
-        {
-            //Using Field Name
-            Console.WriteLine("DepartmentID: {0}\t Name : {1} ",
-                RecordRow["DepartmentID"], RecordRow["Name"]);
-
-
-        }
-
-
-        Console.ReadKey();
-
+        connection.Close();
     }
 }
